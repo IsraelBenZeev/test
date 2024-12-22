@@ -1,91 +1,442 @@
-<!DOCTYPE html>
-<html lang="he">
-<head>
+<html><head><base href="https://modernstore.co.il/" target="_blank">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>אתר חדשות</title>
+    <title>החנות המודרנית שלך</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #00cec9;
+            --background-color: #f9f9f9;
+            --text-color: #2d3436;
+            --card-color: #ffffff;
+        }
+    
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
+    
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            direction: rtl;
         }
-        header h1 {
-            margin: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-        }
-        .article {
-            background-color: white;
-            margin-bottom: 20px;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .article img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
-        .article h2 {
-            color: #333;
-        }
-        .article p {
-            font-size: 1.1em;
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #333;
-            color: white;
+    
+        .header {
+            background-color: var(--primary-color);
+            padding: 1rem 2rem;
             position: fixed;
             width: 100%;
-            bottom: 0;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+    
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+    
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+    
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+    
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+    
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+    
+        .product-card {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+    
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+    
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    
+        .product-info {
+            padding: 1rem;
+        }
+    
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+    
+        .product-price {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+    
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+    
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+    
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+    
+        .social-icons a:hover {
+            color: var(--secondary-color);
+            transform: scale(1.2);
+        }
+    
+        .personal-area {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    
+        .personal-area h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+    
+        .personal-area-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+    
+        .personal-area-card {
+            background-color: var(--background-color);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+    
+        .personal-area-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+    
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.8rem;
+        }
+    
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+    
+        .modal-content {
+            background-color: var(--card-color);
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    
+        .close {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        .cart-total {
+            margin-top: 20px;
+            text-align: left;
+            font-weight: bold;
+        }
+    
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        .checkout-btn:hover {
+            background-color: var(--secondary-color);
+        }
+    
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+    
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+    
+            .logo {
+                margin-bottom: 1rem;
+            }
         }
     </style>
-</head>
-<body>
-
-<header>
-    <h1>אתר חדשות</h1>
-</header>
-
-<div class="container">
-    <!-- כתבה 1 -->
-    <div class="article">
-        <img src="https://via.placeholder.com/800x400" alt="תמונה של חדשות">
-        <h2>הכותרת של הכתבה הראשונה</h2>
-        <p>הטקסט של הכתבה הראשונה. כאן יהיה הסיפור המרכזי של החדשות. תוכלו לקרוא על נושא חשוב או חדש, כמו עדכון במצב פוליטי או חידושי טכנולוגיה.</p>
-    </div>
-
-    <!-- כתבה 2 -->
-    <div class="article">
-        <img src="https://via.placeholder.com/800x400" alt="תמונה של חדשות">
-        <h2>הכותרת של הכתבה השנייה</h2>
-        <p>הטקסט של הכתבה השנייה. כאן נוכל לראות עוד עדכון חשוב או נושא שקשור לנושא חם באותו רגע. כל חדשות מעניינות!</p>
-    </div>
-
-    <!-- כתבה 3 -->
-    <div class="article">
-        <img src="https://via.placeholder.com/800x400" alt="תמונה של חדשות">
-        <h2>הכותרת של הכתבה השלישית</h2>
-        <p>הטקסט של הכתבה השלישית. עם עוד עדכון או חדשות מעניין שקשור לעולם הספורט, כלכלה או בידור.</p>
-    </div>
-</div>
-
-<footer>
-    <p>&copy; 2024 אתר חדשות. כל הזכויות שמורות.</p>
-</footer>
-
-</body>
-</html>
+    </head>
+    <body>
+        <header class="header">
+            <div class="logo">החנות המודרנית שלך</div>
+            <nav class="nav-links">
+                <a href="#products">מוצרים</a>
+                <a href="#personal-area">אזור אישי</a>
+                <a href="#contact">צור קשר</a>
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </nav>
+        </header>
+    
+        <main class="main-content">
+            <section id="products" class="product-grid">
+                <!-- כאן נוסיף 50 מוצרים באמצעות JavaScript -->
+            </section>
+    
+            <section id="personal-area" class="personal-area">
+                <h2>אזור אישי</h2>
+                <div class="personal-area-grid">
+                    <div class="personal-area-card">
+                        <h3>היסטוריית רכישות</h3>
+                        <p>צפה בכל הרכישות שביצעת אצלנו</p>
+                    </div>
+                    <div class="personal-area-card">
+                        <h3>מעקב הזמנות</h3>
+                        <p>בדוק את סטטוס ההזמנות שלך</p>
+                    </div>
+                    <div class="personal-area-card">
+                        <h3>פרטים אישיים</h3>
+                        <p>עדכן את הפרטים האישיים שלך</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    
+        <div id="cartModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>עגלת הקניות שלך</h2>
+                <div id="cartItems"></div>
+                <div class="cart-total">סה"כ: ₪<span id="cartTotal">0</span></div>
+                <button class="checkout-btn">לקופה</button>
+            </div>
+        </div>
+    
+        <footer class="footer">
+            <p>© 2023 החנות המודרנית שלך. כל הזכויות שמורות.</p>
+            <div class="social-icons">
+                <a href="https://instagram.com/modernstore" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/972XXXXXXXXX" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://facebook.com/modernstore" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="mailto:info@modernstore.co.il" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
+    
+        <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const productGrid = document.querySelector('.product-grid');
+            const cartIcon = document.getElementById('cartIcon');
+            const cartModal = document.getElementById('cartModal');
+            const closeBtn = document.getElementsByClassName('close')[0];
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartCount = document.querySelector('.cart-count');
+            let cart = [];
+    
+            const products = [
+                {name: "חולצת טי שיק", price: 79.99, image: "https://example.com/tshirt.jpg"},
+                {name: "ג'ינס סקיני", price: 149.99, image: "https://example.com/jeans.jpg"},
+                {name: "נעלי ספורט אולטרה", price: 199.99, image: "https://example.com/sneakers.jpg"},
+                {name: "שמלת ערב אלגנטית", price: 299.99, image: "https://example.com/dress.jpg"},
+                {name: "חליפת עסקים", price: 499.99, image: "https://example.com/suit.jpg"},
+                // ... עוד 45 מוצרים
+            ];
+    
+            // יצירת 50 מוצרים
+            for (let i = 0; i < 50; i++) {
+                const product = products[i % products.length]; // מחזוריות על המוצרים הקיימים
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">₪${product.price.toFixed(2)}</p>
+                        <button class="add-to-cart" data-name="${product.name}" data-price="${product.price}">הוסף לעגלה</button>
+                    </div>
+                `;
+                productGrid.appendChild(productCard);
+            }
+    
+            // פונקציות לעגלת הקניות
+            function addToCart(name, price) {
+                const existingItem = cart.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ name, price, quantity: 1 });
+                }
+                updateCart();
+            }
+    
+            function updateCart() {
+                cartItems.innerHTML = '';
+                let total = 0;
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    cartItems.innerHTML += `
+                        <div class="cart-item">
+                            <span>${item.name} x ${item.quantity}</span>
+                            <span>₪${itemTotal.toFixed(2)}</span>
+                        </div>
+                    `;
+                });
+                cartTotal.textContent = total.toFixed(2);
+                cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            }
+    
+            // אירועי לחיצה
+            productGrid.addEventListener('click', (e) => {
+                if (e.target.classList.contains('add-to-cart')) {
+                    const name = e.target.getAttribute('data-name');
+                    const price = parseFloat(e.target.getAttribute('data-price'));
+                    addToCart(name, price);
+                }
+            });
+    
+            cartIcon.addEventListener('click', () => {
+                cartModal.style.display = 'block';
+            });
+    
+            closeBtn.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+            });
+    
+            window.addEventListener('click', (e) => {
+                if (e.target == cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+    
+            // אנימציית הופעה למוצרים
+            const productCards = document.querySelectorAll('.product-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+    
+            productCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+    
+            // אנימציה לאייקונים החברתיים
+            const socialIcons = document.querySelectorAll('.social-icons a');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseover', () => {
+                    icon.style.transform = 'scale(1.2) rotate(10deg)';
+                });
+                icon.addEventListener('mouseout', () => {
+                    icon.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        });
+        </script>
+    </body>
+    </html>
